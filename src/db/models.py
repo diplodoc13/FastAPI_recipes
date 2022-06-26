@@ -33,11 +33,12 @@ class SARecipe(Timestamp, Base):
     steps = Column(String(1000), nullable=True)
     photo = Column(String(1000), nullable=False, default="https://ppss.kr/wp-content/uploads/2017/08/"
                                                          "MC_SightWords-Some.jpg")
-    likes = Column(Integer, default=0)
+    likes_count = Column(Integer, default=0)
     tags = Column(String(1000), nullable=True, default="[]")
     is_active = Column(Boolean, default=True)
 
     author = relationship("SAUser", back_populates="recipes")
+    likes = relationship("SALike", back_populates="recipe")
 
 
 class SAUser(Timestamp, Base):
@@ -46,8 +47,22 @@ class SAUser(Timestamp, Base):
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String(100), nullable=False, unique=True)
     hashed_password = Column(String(100), nullable=False)
-    likes = Column(Integer, default=0)
+    likes_from_all_my_recipes = Column(Integer, default=0)
+    my_recipes_count = Column(Integer, default=0)
+    liked_recipes_titles = Column(String(1000), nullable=True, default="[]")
     is_active = Column(Boolean, default=True)
     is_admin = Column(Boolean, default=False)
 
     recipes = relationship("SARecipe", back_populates="author")
+    likes = relationship("SALike", back_populates="user")
+
+
+class SALike(Timestamp, Base):
+    __tablename__ = "likes"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"))
+    recipe_id = Column(Integer, ForeignKey("recipes.id", ondelete="CASCADE"))
+
+    user = relationship("SAUser", back_populates="likes")
+    recipe = relationship("SARecipe", back_populates="likes")

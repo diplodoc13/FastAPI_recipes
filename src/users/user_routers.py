@@ -8,7 +8,7 @@ from src.db.database import get_db
 from src.users import user_crud
 from src.users.oauth2 import Token, authenticate_user, ACCESS_TOKEN_EXPIRE_MINUTES, create_access_token, \
     get_current_active_user
-from src.users.user_schemas import UserInResponse, NewUser
+from src.users.user_schemas import NewUser, UserResponse
 
 router = APIRouter(
     tags=["Users"],
@@ -18,6 +18,7 @@ router = APIRouter(
 router_auth = APIRouter(
     tags=["Authentication"]
 )
+
 
 @router_auth.post("/token", response_model=Token)
 def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
@@ -32,10 +33,13 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db:
     access_token = create_access_token(data={"sub": user.username}, expires_delta=access_token_expires)
     return {"access_token": access_token, "token_type": "bearer"}
 
-@router.get("/me", status_code=status.HTTP_200_OK, response_model=UserInResponse)
-def read_users_me( current_user: UserInResponse = Depends(get_current_active_user)):
-    return current_user
 
-@router.post("/",status_code=status.HTTP_201_CREATED, response_model=UserInResponse)
+@router.post("/", status_code=status.HTTP_201_CREATED, response_model=UserResponse)
 def create_user(request: NewUser, db: Session = Depends(get_db)):
     return user_crud.create_user(db, request)
+
+
+@router.get("/me", status_code=status.HTTP_200_OK, response_model=UserResponse)
+def read_users_me(current_user: UserResponse = Depends(get_current_active_user)):
+    return current_user
+

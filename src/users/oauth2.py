@@ -10,7 +10,7 @@ from pydantic import BaseModel
 
 from src.db import models
 from src.db.database import get_db
-from src.users.user_schemas import UserInResponse
+from src.users.user_schemas import UserResponse
 
 SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
 ALGORITHM = "HS256"
@@ -84,7 +84,7 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
     return user
 
 
-def get_current_active_user(current_user: UserInResponse = Depends(get_current_user)):
+def get_current_active_user(current_user: UserResponse = Depends(get_current_user)):
     if not current_user.is_active:
         raise HTTPException(status_code=400, detail="Inactive user")
     return current_user
