@@ -4,6 +4,11 @@
 [![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-005?style=flat-square)](https://www.sqlalchemy.org/)
 [![Pydantic](https://img.shields.io/badge/Pydantic-0001?style=flat-square)](https://pydantic-docs.helpmanual.io/)
 
+[![Pydantic](https://wakatime.com/badge/user/499e43e9-6f16-4377-92ae-078c74517dbb/project/dc596292-46f6-4f63-86d9-ab0e8bdda598.svg)](https://wakatime.com/badge/user/499e43e9-6f16-4377-92ae-078c74517dbb/project/dc596292-46f6-4f63-86d9-ab0e8bdda598.svg)
+
+
+
+
 Testing project.
 
 In this project I use:
