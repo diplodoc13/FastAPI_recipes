@@ -1,0 +1,738 @@
+---
+openapi: 3.0.2
+info:
+  title: FastAPI
+  version: 0.1.0
+paths:
+  "/token":
+    post:
+      tags:
+      - Authentication
+      summary: Login For Access Token
+      operationId: login_for_access_token_token_post
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              "$ref": "#/components/schemas/Body_login_for_access_token_token_post"
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Token"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/users/":
+    get:
+      tags:
+      - Users
+      summary: Read Users
+      operationId: read_users_users__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Read Users Users  Get
+                type: array
+                items:
+                  "$ref": "#/components/schemas/UserResponse"
+      security:
+      - OAuth2PasswordBearer: []
+    post:
+      tags:
+      - Users
+      summary: Create User
+      operationId: create_user_users__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/NewUser"
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UserResponse"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/users/me/deactivate":
+    put:
+      tags:
+      - Users
+      summary: Deactivate Me
+      operationId: deactivate_me_users_me_deactivate_put
+      responses:
+        '204':
+          description: Successful Response
+      security:
+      - OAuth2PasswordBearer: []
+  "/users/me/delete":
+    delete:
+      tags:
+      - Users
+      summary: Delete Me
+      operationId: delete_me_users_me_delete_delete
+      responses:
+        '204':
+          description: Successful Response
+      security:
+      - OAuth2PasswordBearer: []
+  "/users/me":
+    get:
+      tags:
+      - Users
+      summary: Read Users Me
+      operationId: read_users_me_users_me_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UserResponse"
+      security:
+      - OAuth2PasswordBearer: []
+    put:
+      tags:
+      - Users
+      summary: Update Me
+      operationId: update_me_users_me_put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/UpdateUser"
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UserResponse"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+      security:
+      - OAuth2PasswordBearer: []
+  "/users/{id}":
+    get:
+      tags:
+      - Users
+      summary: Read User
+      operationId: read_user_users__id__get
+      parameters:
+      - required: true
+        schema:
+          title: Id
+          type: integer
+        name: id
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UserResponse"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+      security:
+      - OAuth2PasswordBearer: []
+  "/users/block/{id}":
+    put:
+      tags:
+      - Users
+      summary: Block User
+      operationId: block_user_users_block__id__put
+      parameters:
+      - required: true
+        schema:
+          title: Id
+          type: integer
+        name: id
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ShowUser"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+      security:
+      - OAuth2PasswordBearer: []
+  "/users/unblock/{id}":
+    put:
+      tags:
+      - Users
+      summary: Unblock User
+      operationId: unblock_user_users_unblock__id__put
+      parameters:
+      - required: true
+        schema:
+          title: Id
+          type: integer
+        name: id
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ShowUser"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+      security:
+      - OAuth2PasswordBearer: []
+  "/recipe/":
+    get:
+      tags:
+      - Recipes
+      summary: Show All Recipes
+      operationId: show_all_recipes_recipe__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Show All Recipes Recipe  Get
+                type: array
+                items:
+                  "$ref": "#/components/schemas/RecipeResponse"
+      security:
+      - OAuth2PasswordBearer: []
+    post:
+      tags:
+      - Recipes
+      summary: Create Recipe
+      operationId: create_recipe_recipe__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/NewRecipe"
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/RecipeResponse"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+      security:
+      - OAuth2PasswordBearer: []
+  "/recipe/{id}":
+    get:
+      tags:
+      - Recipes
+      summary: Show Recipe
+      operationId: show_recipe_recipe__id__get
+      parameters:
+      - required: true
+        schema:
+          title: Id
+          type: integer
+        name: id
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/RecipeFullResponse"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+      security:
+      - OAuth2PasswordBearer: []
+    put:
+      tags:
+      - Recipes
+      summary: Like Recipe
+      operationId: like_recipe_recipe__id__put
+      parameters:
+      - required: true
+        schema:
+          title: Recipe Id
+          type: integer
+        name: recipe_id
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+      security:
+      - OAuth2PasswordBearer: []
+    delete:
+      tags:
+      - Recipes
+      summary: Delete My Recipe
+      operationId: delete_my_recipe_recipe__id__delete
+      parameters:
+      - required: true
+        schema:
+          title: Recipe Id
+          type: integer
+        name: recipe_id
+        in: query
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+      security:
+      - OAuth2PasswordBearer: []
+  "/recipe/{id}/favorite":
+    put:
+      tags:
+      - Recipes
+      summary: Add Favorite Recipe
+      operationId: add_favorite_recipe_recipe__id__favorite_put
+      parameters:
+      - required: true
+        schema:
+          title: Recipe Id
+          type: integer
+        name: recipe_id
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+      security:
+      - OAuth2PasswordBearer: []
+  "/recipe/{id}/unfavorite":
+    put:
+      tags:
+      - Recipes
+      summary: Remove Recipe From Favorites
+      operationId: remove_recipe_from_favorites_recipe__id__unfavorite_put
+      parameters:
+      - required: true
+        schema:
+          title: Recipe Id
+          type: integer
+        name: recipe_id
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+      security:
+      - OAuth2PasswordBearer: []
+  "/recipe/{id}/update":
+    put:
+      tags:
+      - Recipes
+      summary: Update My Recipe
+      operationId: update_my_recipe_recipe__id__update_put
+      parameters:
+      - required: true
+        schema:
+          title: Recipe Id
+          type: integer
+        name: recipe_id
+        in: query
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/UpdateRecipe"
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+      security:
+      - OAuth2PasswordBearer: []
+  "/recipe/block/{id}":
+    put:
+      tags:
+      - Recipes
+      summary: Block Recipe
+      operationId: block_recipe_recipe_block__id__put
+      parameters:
+      - required: true
+        schema:
+          title: Recipe Id
+          type: integer
+        name: recipe_id
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+      security:
+      - OAuth2PasswordBearer: []
+  "/recipe/unblock/{id}":
+    put:
+      tags:
+      - Recipes
+      summary: Unblock Recipe
+      operationId: unblock_recipe_recipe_unblock__id__put
+      parameters:
+      - required: true
+        schema:
+          title: Recipe Id
+          type: integer
+        name: recipe_id
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+      security:
+      - OAuth2PasswordBearer: []
+components:
+  schemas:
+    Body_login_for_access_token_token_post:
+      title: Body_login_for_access_token_token_post
+      required:
+      - username
+      - password
+      type: object
+      properties:
+        grant_type:
+          title: Grant Type
+          pattern: password
+          type: string
+        username:
+          title: Username
+          type: string
+        password:
+          title: Password
+          type: string
+        scope:
+          title: Scope
+          type: string
+          default: ''
+        client_id:
+          title: Client Id
+          type: string
+        client_secret:
+          title: Client Secret
+          type: string
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            "$ref": "#/components/schemas/ValidationError"
+    NewRecipe:
+      title: NewRecipe
+      required:
+      - title
+      - description
+      - type
+      - steps
+      type: object
+      properties:
+        title:
+          title: Title
+          type: string
+        description:
+          title: Description
+          type: string
+        type:
+          title: Type
+          type: string
+        steps:
+          title: Steps
+          type: string
+    NewUser:
+      title: NewUser
+      required:
+      - username
+      - password
+      type: object
+      properties:
+        username:
+          title: Username
+          type: string
+        password:
+          title: Password
+          type: string
+    RecipeFullResponse:
+      title: RecipeFullResponse
+      required:
+      - id
+      - title
+      - description
+      - type
+      - likes_count
+      - photo
+      - is_active
+      - author
+      - steps
+      type: object
+      properties:
+        id:
+          title: Id
+          type: integer
+        title:
+          title: Title
+          type: string
+        description:
+          title: Description
+          type: string
+        type:
+          title: Type
+          type: string
+        likes_count:
+          title: Likes Count
+          type: integer
+        photo:
+          title: Photo
+          type: string
+        is_active:
+          title: Is Active
+          type: boolean
+        author:
+          "$ref": "#/components/schemas/ShowUser"
+        steps:
+          title: Steps
+          type: string
+    RecipeResponse:
+      title: RecipeResponse
+      required:
+      - id
+      - title
+      - description
+      - type
+      - likes_count
+      - photo
+      - is_active
+      - author
+      type: object
+      properties:
+        id:
+          title: Id
+          type: integer
+        title:
+          title: Title
+          type: string
+        description:
+          title: Description
+          type: string
+        type:
+          title: Type
+          type: string
+        likes_count:
+          title: Likes Count
+          type: integer
+        photo:
+          title: Photo
+          type: string
+        is_active:
+          title: Is Active
+          type: boolean
+        author:
+          "$ref": "#/components/schemas/ShowUser"
+    ShowUser:
+      title: ShowUser
+      required:
+      - username
+      - is_active
+      type: object
+      properties:
+        username:
+          title: Username
+          type: string
+        is_active:
+          title: Is Active
+          type: boolean
+    Token:
+      title: Token
+      required:
+      - access_token
+      - token_type
+      type: object
+      properties:
+        access_token:
+          title: Access Token
+          type: string
+        token_type:
+          title: Token Type
+          type: string
+    UpdateRecipe:
+      title: UpdateRecipe
+      type: object
+      properties:
+        title:
+          title: Title
+          type: string
+        description:
+          title: Description
+          type: string
+        type:
+          title: Type
+          type: string
+        steps:
+          title: Steps
+          type: string
+    UpdateUser:
+      title: UpdateUser
+      required:
+      - username
+      type: object
+      properties:
+        username:
+          title: Username
+          type: string
+    UserResponse:
+      title: UserResponse
+      required:
+      - id
+      - username
+      - is_active
+      - is_admin
+      - likes_from_all_my_recipes
+      - my_recipes_count
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        username:
+          title: Username
+          type: string
+        is_active:
+          title: Is Active
+          type: boolean
+        is_admin:
+          title: Is Admin
+          type: boolean
+        likes_from_all_my_recipes:
+          title: Likes From All My Recipes
+          type: integer
+        my_recipes_count:
+          title: My Recipes Count
+          type: integer
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: token
