@@ -44,7 +44,18 @@ http://127.0.0.1:8000/docs
 ```
 
 ## Documentation
-The documentation `/docs/openapi.yml` can be seen it online at https:// and also when you start the project at `http://127.0.0.1:8000/docs/`.
+The documentation `/docs/openapi.yml` 
+
+You can catch up this app (with demo database) online at:
+
+https://ikd2xw.deta.dev/docs#/
+
+
+username: `admin`
+password: `admin`
+
+
+Also, when you start the project locally  `http://127.0.0.1:8000/docs/`.
 
 
 ## Contact the author
